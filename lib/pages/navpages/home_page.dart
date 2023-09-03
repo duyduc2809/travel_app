@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cubit/misc/colors.dart';
 import 'package:flutter_cubit/widgets/app_large_text.dart';
+import 'package:flutter_cubit/widgets/app_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  var images = {
+    'balloning.png': 'Balloning',
+    'hiking.png': 'Hiking',
+    'kayaking.png': 'Kayaking',
+    'snorkling.png': 'Snorkling'
+  };
+
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(
@@ -41,14 +49,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 30,
           ),
           //discover text
           Container(
             margin: const EdgeInsets.only(left: 20),
             child: AppLargeText(text: 'Discover'),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 20),
           //tabbar
           Container(
             child: Align(
@@ -100,6 +108,62 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppLargeText(
+                  text: 'Explore more',
+                  size: 22,
+                ),
+                AppText(
+                  text: 'See all',
+                  color: AppColors.textColor1,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+              height: 120,
+              width: double.maxFinite,
+              margin: const EdgeInsets.only(left: 20),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (_, index) {
+                    return Container(
+                      margin: const EdgeInsets.only(right: 30),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'img/' + images.keys.elementAt(index)),
+                                    fit: BoxFit.cover)),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          AppText(
+                            text: images.values.elementAt(index),
+                            color: AppColors.textColor2,
+                          )
+                        ],
+                      ),
+                    );
+                  })),
         ],
       ),
     );
