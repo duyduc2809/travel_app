@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: [
           //menu text
           Container(
-            padding: const EdgeInsets.only(top: 70, left: 20),
+            padding: const EdgeInsets.only(top: 40, left: 20),
             child: Row(
               children: [
                 Icon(Icons.menu, size: 30, color: Colors.black54),
@@ -49,14 +49,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           //discover text
           Container(
             margin: const EdgeInsets.only(left: 20),
             child: AppLargeText(text: 'Discover'),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           //tabbar
           Container(
             child: Align(
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           Container(
             padding: const EdgeInsets.only(left: 20),
-            height: 300,
+            height: 250,
             width: double.maxFinite,
             child: TabBarView(
               controller: _tabController,
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
@@ -143,14 +143,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Column(
                         children: [
                           Container(
-                            width: 80,
-                            height: 80,
+                            width: 60,
+                            height: 60,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.white,
                                 image: DecorationImage(
                                     image: AssetImage(
-                                        'img/' + images.keys.elementAt(index)),
+                                        'img/${images.keys.elementAt(index)}'),
                                     fit: BoxFit.cover)),
                           ),
                           const SizedBox(

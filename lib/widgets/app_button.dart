@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_cubit/widgets/app_text.dart';
-
 import '../misc/colors.dart';
+import 'app_text.dart';
 
-class AppButtons extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final Color color;
+  final Color backgroundColor;
   String? text;
   IconData? icon;
-  final Color backgroundColor;
   double size;
-  final Color boderColor;
+  final Color borderColor;
   bool? isIcon;
 
-  AppButtons(
+  AppButton(
       {Key? key,
       this.isIcon = false,
-      this.text,
+      this.text = 'Hi',
       this.icon,
+      required this.size,
       required this.color,
       required this.backgroundColor,
-      required this.size,
-      required this.boderColor})
+      required this.borderColor})
       : super(key: key);
 
   @override
@@ -30,19 +28,26 @@ class AppButtons extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-          border: Border.all(color: boderColor, width: 1.0),
-          borderRadius: BorderRadius.circular(15),
-          color: AppColors.buttonBackground),
+        border: Border.all(
+          color: borderColor,
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(15),
+        color: backgroundColor,
+      ),
       child: isIcon == false
-          ? AppText(
-              text: text!,
-              color: Colors.black,
+          ? Center(
+              child: AppText(
+                text: text!,
+                color: color,
+              ),
             )
           : Center(
               child: Icon(
-              icon,
-              color: color,
-            )),
+                icon,
+                color: color,
+              ),
+            ),
     );
   }
 }

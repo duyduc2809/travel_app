@@ -3,6 +3,8 @@ import 'package:flutter_cubit/misc/colors.dart';
 import 'package:flutter_cubit/widgets/app_button.dart';
 import 'package:flutter_cubit/widgets/app_large_text.dart';
 import 'package:flutter_cubit/widgets/app_text.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_cubit/widgets/responsive_button.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -13,6 +15,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int gottenStars = 3;
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class _DetailPageState extends State<DetailPage> {
                 right: 0,
                 child: Container(
                   width: double.maxFinite,
-                  height: 350,
+                  height: 300,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('img/mountain.jpeg'),
@@ -35,7 +38,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 )),
             Positioned(
-                top: 50,
+                top: 38,
                 left: 20,
                 child: Row(
                   children: [
@@ -47,10 +50,9 @@ class _DetailPageState extends State<DetailPage> {
                   ],
                 )),
             Positioned(
-                top: 320,
+                top: 260,
                 child: Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-                  color: Colors.red,
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   width: MediaQuery.of(context).size.width,
                   height: 500,
                   decoration: const BoxDecoration(
@@ -72,7 +74,7 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ]),
                         const SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         Row(
                           children: [
@@ -88,7 +90,7 @@ class _DetailPageState extends State<DetailPage> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(children: [
                           Wrap(
@@ -96,19 +98,19 @@ class _DetailPageState extends State<DetailPage> {
                               return Icon(
                                 Icons.star,
                                 color: index < gottenStars
-                                    ? AppColors.textColor2
+                                    ? AppColors.starColor
                                     : AppColors.textColor2,
                               );
                             }),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 5),
                           AppText(
                             text: '(4.0)',
                             color: AppColors.textColor2,
                           )
                         ]),
                         const SizedBox(
-                          height: 25,
+                          height: 12,
                         ),
                         AppLargeText(
                           text: 'People',
@@ -120,26 +122,73 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         AppText(
                           text: 'Number of people in your group',
-                          color: AppColors.mainColor,
+                          color: AppColors.mainTextColor,
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 8,
                         ),
                         Wrap(
                           children: List.generate(5, (index) {
-                            return Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              child: AppButtons(
-                                color: Colors.black,
-                                backgroundColor: AppColors.buttonBackground,
-                                size: 50,
-                                boderColor: AppColors.buttonBackground,
-                                text: (index + 1).toString(),
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = index;
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 10),
+                                child: AppButton(
+                                  size: 50,
+                                  color: selectedIndex == index
+                                      ? Colors.white
+                                      : Colors.black,
+                                  backgroundColor: selectedIndex == index
+                                      ? Colors.black
+                                      : AppColors.buttonBackground,
+                                  borderColor: selectedIndex == index
+                                      ? Colors.black
+                                      : AppColors.buttonBackground,
+                                  text: (index + 1).toString(),
+                                ),
                               ),
                             );
                           }),
                         ),
+                        AppLargeText(
+                          text: 'Description',
+                          color: Colors.black.withOpacity(0.8),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AppText(
+                          text:
+                              'You must go for a travel. Travelling helps get rid of pressure. Go to the moutains to see the nature.',
+                          color: AppColors.mainTextColor,
+                        )
                       ]),
+                )),
+            Positioned(
+                bottom: 20,
+                left: 20,
+                right: 20,
+                child: Row(
+                  children: [
+                    AppButton(
+                      color: AppColors.textColor1,
+                      backgroundColor: Colors.white,
+                      size: 60,
+                      borderColor: AppColors.textColor1,
+                      isIcon: true,
+                      icon: Icons.favorite_border,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    ResponsiveButton(
+                      isResponsive: true,
+                    )
+                  ],
                 ))
           ],
         ),
