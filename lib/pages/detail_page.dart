@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
+import 'package:flutter_cubit/widgets/app_button.dart';
 import 'package:flutter_cubit/widgets/app_large_text.dart';
 import 'package:flutter_cubit/widgets/app_text.dart';
 
@@ -11,6 +12,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int gottenStars = 3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,7 @@ class _DetailPageState extends State<DetailPage> {
                 child: Container(
                   width: double.maxFinite,
                   height: 350,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('img/mountain.jpeg'),
                         fit: BoxFit.cover),
@@ -38,7 +41,7 @@ class _DetailPageState extends State<DetailPage> {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.menu),
+                      icon: const Icon(Icons.menu),
                       color: Colors.white,
                     )
                   ],
@@ -50,42 +53,93 @@ class _DetailPageState extends State<DetailPage> {
                   color: Colors.red,
                   width: MediaQuery.of(context).size.width,
                   height: 500,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
-                  child: Column(children: [
-                    Row(children: [
-                      AppLargeText(
-                        text: 'Yosemite',
-                        color: Colors.black.withOpacity(0.8),
-                      ),
-                      AppLargeText(
-                        text: '\$ 250',
-                        color: AppColors.mainColor,
-                      ),
-                    ]),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_on,
+                        Row(children: [
+                          AppLargeText(
+                            text: 'Yosemite',
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          AppLargeText(
+                            text: '\$ 250',
+                            color: AppColors.mainColor,
+                          ),
+                        ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              color: AppColors.mainColor,
+                            ),
+                            const SizedBox(width: 5),
+                            AppText(
+                              text: 'USA, California',
+                              color: AppColors.textColor1,
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(children: [
+                          Wrap(
+                            children: List.generate(5, (index) {
+                              return Icon(
+                                Icons.star,
+                                color: index < gottenStars
+                                    ? AppColors.textColor2
+                                    : AppColors.textColor2,
+                              );
+                            }),
+                          ),
+                          const SizedBox(width: 10),
+                          AppText(
+                            text: '(4.0)',
+                            color: AppColors.textColor2,
+                          )
+                        ]),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        AppLargeText(
+                          text: 'People',
+                          color: Colors.black.withOpacity(0.8),
+                          size: 20,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        AppText(
+                          text: 'Number of people in your group',
                           color: AppColors.mainColor,
                         ),
-                        const SizedBox(width: 5),
-                        AppText(
-                          text: 'USA, California',
-                          color: AppColors.textColor1,
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ]),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Wrap(
+                          children: List.generate(5, (index) {
+                            return Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              child: AppButtons(
+                                color: Colors.black,
+                                backgroundColor: AppColors.buttonBackground,
+                                size: 50,
+                                boderColor: AppColors.buttonBackground,
+                                text: (index + 1).toString(),
+                              ),
+                            );
+                          }),
+                        ),
+                      ]),
                 ))
           ],
         ),
