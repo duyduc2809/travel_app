@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cubit/misc/colors.dart';
 import 'package:flutter_cubit/widgets/app_large_text.dart';
+import 'package:flutter_cubit/widgets/app_text.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -54,20 +55,37 @@ class _DetailPageState extends State<DetailPage> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
-                  child: Column(
-                    children: [
-                      Row(children: [
-                        AppLargeText(
-                          text: 'Yosemite',
-                          color: Colors.black.withOpacity(0.8),
-                        ),
-                        AppLargeText(
-                          text: '\$ 250',
+                  child: Column(children: [
+                    Row(children: [
+                      AppLargeText(
+                        text: 'Yosemite',
+                        color: Colors.black.withOpacity(0.8),
+                      ),
+                      AppLargeText(
+                        text: '\$ 250',
+                        color: AppColors.mainColor,
+                      ),
+                    ]),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
                           color: AppColors.mainColor,
+                        ),
+                        const SizedBox(width: 5),
+                        AppText(
+                          text: 'USA, California',
+                          color: AppColors.textColor1,
                         )
-                      ]),
-                    ],
-                  ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ]),
                 ))
           ],
         ),
