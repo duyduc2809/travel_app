@@ -7,7 +7,8 @@ import 'package:flutter_cubit/pages/navpages/main_page.dart';
 import 'package:flutter_cubit/pages/welcome_page.dart';
 import 'package:flutter_cubit/services/data_services.dart';
 
-void main() {
+void main() async {
+  await Future.delayed(const Duration(milliseconds: 200));
   runApp(const MyApp());
 }
 
